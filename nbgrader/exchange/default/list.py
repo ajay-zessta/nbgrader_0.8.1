@@ -209,11 +209,17 @@ class ExchangeList(ABCExchangeList, Exchange):
 
         if self.inbound or self.cached:
             self.log.info("Submitted assignments:")
+            self.log.info("***********************************************************************")
+            self.log.info(assignments)
+            self.log.info("***********************************************************************")
             for assignment in assignments:
                 for info in assignment['submissions']:
                     self.log.info(self.format_inbound_assignment(info))
         else:
             self.log.info("Released assignments:")
+            self.log.info("***********************************************************************")
+            self.log.info(assignments)
+            self.log.info("***********************************************************************")
             for info in assignments:
                 self.log.info(self.format_outbound_assignment(info))
 
