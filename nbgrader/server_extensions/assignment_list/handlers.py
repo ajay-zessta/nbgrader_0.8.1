@@ -73,9 +73,10 @@ class AssignmentList(LoggingConfigurable):
     def list_released_assignments(self, course_id=None):
         with self.get_assignment_dir_config() as config:
             try:
+                print("entered try")
                 if course_id:
                     config.CourseDirectory.course_id = course_id
-
+                print("course is: "+str(course_id))
                 coursedir = CourseDirectory(config=config)
                 authenticator = Authenticator(config=config)
                 lister = ExchangeFactory(config=config).List(
@@ -83,8 +84,9 @@ class AssignmentList(LoggingConfigurable):
                     authenticator=authenticator,
                     config=config)
                 assignments = lister.start()
-
+                print(assignments)
             except Exception as e:
+                print("entered except")
                 self.log.error(traceback.format_exc())
                 if isinstance(e, ExchangeError):
                     retvalue = {
